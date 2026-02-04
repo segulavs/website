@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-databricks: #ff3621;
+  --color-databricks-hover: #ff5a47;
+  --color-surface: #0f1419;
+  --color-surface-elevated: #1a2332;
+  --color-border: #2d3a4d;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-surface);
+  color: #e6edf3;
+  font-family: var(--font-sans);
+}

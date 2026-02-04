@@ -1,0 +1,7 @@
+# Databricks Apps runtime config for dbxedm
+# Deployment: npm install → npm run build → npm run start
+# App serves the built React app on PORT (default 8000)
+command:
+  - npm
+  - run
+  - start
