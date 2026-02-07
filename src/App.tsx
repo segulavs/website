@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link, useLocation, Routes, Route, BrowserRouter } from 'react-router-dom'
 import About from './pages/About.tsx'
+import Requirements from './pages/Requirements.tsx'
 
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
   const isAbout = location.pathname === '/about'
+  const isSubpage = location.pathname === '/about' || location.pathname === '/requirements'
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--color-surface)]/90 backdrop-blur-md border-b border-[var(--color-border)]">
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -13,7 +15,7 @@ function Nav() {
           dbxedm
         </Link>
         <div className="hidden md:flex items-center gap-8">
-          {!isAbout && (
+          {!isSubpage && (
             <>
               <a href="/#why" className="text-slate-300 hover:text-white text-sm font-medium transition-colors">Why dbxedm</a>
               <a href="/#ai-ml" className="text-slate-300 hover:text-white text-sm font-medium transition-colors">AI/ML</a>
@@ -29,6 +31,12 @@ function Nav() {
               </a>
             </>
           )}
+          <Link
+            to="/requirements"
+            className={`text-sm font-medium transition-colors ${location.pathname === '/requirements' ? 'text-[var(--color-databricks)]' : 'text-slate-300 hover:text-white'}`}
+          >
+            Requirements
+          </Link>
           <Link
             to="/about"
             className={`text-sm font-medium transition-colors ${isAbout ? 'text-[var(--color-databricks)]' : 'text-slate-300 hover:text-white'}`}
@@ -49,7 +57,7 @@ function Nav() {
       </nav>
       {menuOpen && (
         <div className="md:hidden border-t border-[var(--color-border)] px-6 py-4 flex flex-col gap-4">
-          {!isAbout && (
+          {!isSubpage && (
             <>
               <a href="/#why" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>Why dbxedm</a>
               <a href="/#ai-ml" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>AI/ML</a>
@@ -60,6 +68,7 @@ function Nav() {
               <a href="/#try-demo" className="rounded-md bg-[var(--color-databricks)] px-4 py-2 text-center text-white font-medium" onClick={() => setMenuOpen(false)}>Get started</a>
             </>
           )}
+          <Link to="/requirements" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>Requirements</Link>
           <Link to="/about" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>About us</Link>
         </div>
       )}
@@ -422,6 +431,7 @@ function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <Link to="/" className="text-slate-500 text-sm font-medium hover:text-slate-400 transition-colors">dbxedm</Link>
         <div className="flex gap-6 text-slate-500 text-sm">
+          <Link to="/requirements" className="hover:text-slate-300 transition-colors">Requirements</Link>
           <Link to="/about" className="hover:text-slate-300 transition-colors">About us</Link>
           <a href="#" className="hover:text-slate-300 transition-colors">Privacy</a>
           <a href="#" className="hover:text-slate-300 transition-colors">Terms</a>
@@ -454,6 +464,7 @@ export default function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/requirements" element={<Requirements />} />
           <Route path="/about" element={<About />} />
         </Routes>
         <Footer />
