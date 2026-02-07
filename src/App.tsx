@@ -20,6 +20,7 @@ function Nav() {
               <a href="/#why" className="text-slate-300 hover:text-white text-sm font-medium transition-colors">Why dbxedm</a>
               <a href="/#ai-ml" className="text-slate-300 hover:text-white text-sm font-medium transition-colors">AI/ML</a>
               <a href="/#solutions" className="text-slate-300 hover:text-white text-sm font-medium transition-colors">Solutions</a>
+              <a href="/#features" className="text-slate-300 hover:text-white text-sm font-medium transition-colors">Features</a>
               <a href="/#impact" className="text-slate-300 hover:text-white text-sm font-medium transition-colors">Impact</a>
               <a href="/#try-demo" className="text-slate-300 hover:text-white text-sm font-medium transition-colors">Try demo</a>
               <a href="/#demo" className="text-sm font-medium text-[var(--color-databricks)] hover:text-[var(--color-databricks-hover)] transition-colors">Schedule a demo</a>
@@ -62,6 +63,7 @@ function Nav() {
               <a href="/#why" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>Why dbxedm</a>
               <a href="/#ai-ml" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>AI/ML</a>
               <a href="/#solutions" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>Solutions</a>
+              <a href="/#features" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>Features</a>
               <a href="/#impact" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>Impact</a>
               <a href="/#try-demo" className="text-slate-300 hover:text-white" onClick={() => setMenuOpen(false)}>Try demo</a>
               <a href="/#demo" className="text-[var(--color-databricks)] font-medium" onClick={() => setMenuOpen(false)}>Schedule a demo</a>
@@ -232,6 +234,87 @@ function SolutionsSection() {
               </span>
             </a>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const featurePillars = [
+  {
+    title: 'Master Data Management',
+    subtitle: 'Golden records, resolution, and governance in the lakehouse.',
+    features: [
+      'AI/ML entity resolution & deduplication',
+      'Source ranking & trust-based survivorship',
+      'Cross-domain mastering (Customer, Product, Vendor, Instrument)',
+      'Data stewardship workflows & BPM',
+      'Rapid data model & application definition',
+      'Audit trail & full lineage',
+    ],
+  },
+  {
+    title: 'Enterprise Data Management',
+    subtitle: 'Catalog, lineage, security, and compliance on Databricks.',
+    features: [
+      'Reference data management & code sets',
+      'Data catalog, discovery & business glossary',
+      'End-to-end lineage & quality monitoring',
+      'Low-code data management applications',
+      'Row/column security & regulatory compliance',
+    ],
+  },
+  {
+    title: 'Entity 360',
+    subtitle: 'Unified, real-time 360° views for every entity.',
+    features: [
+      'Unified entity view & cross-source consolidation',
+      'Derived & calculated attributes',
+      'Graph-native relationships & network mapping',
+      'Low-latency access for downstream systems',
+      'Conversational & natural language exploration',
+      'Industry & domain templates',
+    ],
+  },
+]
+
+function FeaturesSection() {
+  return (
+    <section id="features" className="py-20 px-6 border-t border-[var(--color-border)]">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white text-center">
+          Features that match how you work
+        </h2>
+        <p className="mt-4 text-slate-300 text-center max-w-2xl mx-auto">
+          Capabilities you expect from leading MDM and 360 platforms—Informatica, Semarchy, Profisee, Reltio—delivered AI-natively on Databricks.
+        </p>
+        <div className="mt-16 grid md:grid-cols-3 gap-8">
+          {featurePillars.map((pillar) => (
+            <div
+              key={pillar.title}
+              className="rounded-xl bg-[var(--color-surface-elevated)] border border-[var(--color-border)] p-6 flex flex-col"
+            >
+              <h3 className="text-lg font-semibold text-white">{pillar.title}</h3>
+              <p className="mt-2 text-slate-400 text-sm leading-relaxed">{pillar.subtitle}</p>
+              <ul className="mt-6 space-y-3 flex-1">
+                {pillar.features.map((f) => (
+                  <li key={f} className="flex gap-3 text-sm text-slate-300">
+                    <span className="shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-[var(--color-databricks)]" aria-hidden />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="mt-12 text-center">
+          <Link
+            to="/requirements"
+            className="inline-flex items-center text-[var(--color-databricks)] font-medium text-sm hover:underline"
+          >
+            See all 42 requirements with how we deliver each
+            <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+          </Link>
         </div>
       </div>
     </section>
@@ -449,6 +532,7 @@ function HomePage() {
         <WhySection />
         <AIMLSection />
         <SolutionsSection />
+        <FeaturesSection />
         <ImpactSection />
         <DemoSection />
         <CTASection />

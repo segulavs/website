@@ -70,6 +70,30 @@ const mdmRequirements: Requirement[] = [
       'Expose master data through APIs and integration patterns so consuming systems can access golden records programmatically.',
     how: 'Golden records in Delta Lake are accessible via Databricks SQL endpoints, REST APIs, and JDBC/ODBC. Downstream systems consume master data directly from the lakehouse—no separate MDM hub to maintain.',
   },
+  {
+    title: 'Source Ranking & Trust-Based Survivorship',
+    description:
+      'Apply source-level reliability ranking and configurable trust decay so survivorship consistently favors the most trusted, timely values across duplicate records.',
+    how: 'Survivorship logic in dbxedm can incorporate source rankings and time-based trust. ML models learn which sources and time windows yield the best outcomes; stewards can tune source priority and decay for critical attributes without coding rules.',
+  },
+  {
+    title: 'AI-Driven Match Tuning & Recommendations',
+    description:
+      'Use AI to recommend and tune match rules, thresholds, and merge strategies—reducing manual configuration and improving match accuracy over time.',
+    how: 'dbxedm relies on trainable ML models rather than static rule sets. The system suggests match thresholds and survivorship behavior from your data and steward feedback; recommendations improve as the models learn from corrections and approvals.',
+  },
+  {
+    title: 'Business Process Modeling for Data Workflows',
+    description:
+      'Design, implement, and monitor data-related workflows—approval chains, review queues, and exception handling—with clear process visibility.',
+    how: 'Data stewardship and mastering workflows run on Databricks with configurable stages and roles. Process state, SLAs, and task queues are visible in dashboards; AI/ML handles routine steps so stewards focus on exceptions and approvals.',
+  },
+  {
+    title: 'Rapid Data Model & Application Definition',
+    description:
+      'Define and evolve master data models and stewardship applications quickly, without lengthy development cycles or rigid schemas.',
+    how: 'Delta Lake and Unity Catalog support flexible schema evolution and new entity types without big-bang migrations. Data models and stewardship UIs are defined in code and config, version-controlled and deployable with your existing CI/CD.',
+  },
 ]
 
 const edmRequirements: Requirement[] = [
@@ -133,6 +157,18 @@ const edmRequirements: Requirement[] = [
       'Maintain a shared vocabulary of business terms, definitions, and data element descriptions to ensure consistent understanding across teams.',
     how: 'Business terms and definitions are managed as Unity Catalog tags and properties. This creates a living glossary that is directly linked to physical data assets, ensuring definitions stay connected to the data they describe.',
   },
+  {
+    title: 'Low-Code Data Management Applications',
+    description:
+      'Enable business users to browse, author, and manage master and reference data through configurable web applications without custom development.',
+    how: 'Databricks provides SQL-based UIs, notebooks, and Apps for data management. dbxedm workflows and golden-record views can be exposed through dashboards and low-code interfaces so stewards and business users work in purpose-built apps on top of the lakehouse.',
+  },
+  {
+    title: 'Discovery & Data Exploration',
+    description:
+      'Discover and explore master and reference data through search, filters, and visual discovery tools so users can find and understand data quickly.',
+    how: 'Unity Catalog search and tagging, combined with Databricks SQL and Lakehouse Explorer, let users discover tables, columns, and lineage. Discovery runs on the same lakehouse where master data lives—no separate discovery silo.',
+  },
 ]
 
 const entity360Requirements: Requirement[] = [
@@ -195,6 +231,36 @@ const entity360Requirements: Requirement[] = [
     description:
       'Enrich entity profiles with external data sources (credit bureaus, market data, firmographics) to create more complete and valuable profiles.',
     how: 'Databricks\' open architecture and partner connectors make it straightforward to ingest and join external data. Enrichment runs as part of the mastering pipeline—ML models incorporate enriched attributes into the golden record.',
+  },
+  {
+    title: 'Derived & Calculated Attributes',
+    description:
+      'Define and maintain computed, predicted, and aggregated attributes on entities and relationships—e.g. lifetime value, risk scores, relationship strength—that update as source data changes.',
+    how: 'Derived attributes are implemented as Delta views or batch/streaming jobs in Databricks. ML models and SQL expressions compute values from golden records and relationships; results are stored or materialized so downstream systems and 360 views always see current derived data.',
+  },
+  {
+    title: 'Graph-Native Entity & Relationship Model',
+    description:
+      'Model entities and relationships in a graph-oriented way so relationship intelligence, network analysis, and traversal queries are first-class capabilities.',
+    how: 'Entity and relationship tables in Delta Lake are queried with graph-style patterns (e.g. GraphFrames, SQL graph extensions, or graph APIs on Databricks). Relationship-level attributes and analytics are supported so you get relationship intelligence without a separate graph database.',
+  },
+  {
+    title: 'Low-Latency Access for Downstream Systems',
+    description:
+      'Serve 360 views and golden records to operational and customer-facing systems with low latency and high throughput at global scale.',
+    how: 'Delta Lake tables are served via Databricks SQL Warehouse (with photon for fast queries), REST APIs, and event streaming. Caching and materialized views keep response times low; no data is copied to a separate operational store—consumers read from the lakehouse.',
+  },
+  {
+    title: 'Conversational & Natural Language Exploration',
+    description:
+      'Let business users explore entities, run segmentation, and ask questions in natural language—e.g. “Show me high-value customers in EMEA”—without writing SQL or building reports.',
+    how: 'Databricks Genie and AI/BI tools enable natural language querying over lakehouse data. Entity and 360 tables can be exposed so users ask questions, define segments, and explore relationships conversationally, with governance and lineage preserved.',
+  },
+  {
+    title: 'Industry & Domain Templates',
+    description:
+      'Accelerate implementation with pre-built data models, match rules, and stewardship patterns for specific industries and use cases (e.g. financial services, healthcare, B2B).',
+    how: 'dbxedm can be extended with domain-specific schemas, reference data, and ML training patterns for common entity types (counterparties, instruments, customers, products). Start from templates and customize in your lakehouse without lock-in to a single vendor stack.',
   },
 ]
 
@@ -281,6 +347,11 @@ export default function Requirements() {
           </h1>
           <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-3xl">
             These are the most commonly requested capabilities across Master Data Management, Enterprise Data Management, and Entity 360 initiatives. For each requirement, we explain exactly how dbxedm delivers it—AI-natively, on Databricks.
+          </p>
+          <p className="mt-4 text-sm text-slate-500 max-w-3xl">
+            Requirements incorporate capabilities commonly found in leading MDM and 360 platforms, including{' '}
+            <span className="text-slate-400">Informatica MDM</span>, <span className="text-slate-400">Semarchy xDM</span>,{' '}
+            <span className="text-slate-400">Profisee</span>, and <span className="text-slate-400">Reltio</span>—reimagined for a single, AI-native lakehouse.
           </p>
         </div>
 
@@ -369,7 +440,7 @@ export default function Requirements() {
           <div className="rounded-xl border border-[var(--color-databricks)]/30 bg-[var(--color-surface-elevated)] p-6 sm:p-8">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
               <div>
-                <div className="text-3xl font-bold text-[var(--color-databricks)]">30</div>
+                <div className="text-3xl font-bold text-[var(--color-databricks)]">42</div>
                 <div className="mt-1 text-sm text-slate-400">Requirements covered</div>
               </div>
               <div>
